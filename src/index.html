@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Clarity Software — Custom Software for Sydney SMBs</title>
+<meta name="description" content="Custom software built for Sydney small businesses. Replace spreadsheets, paper, and WhatsApp with software that fits how you actually work." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0b0f14;
+    --bg-2: #0f141b;
+    --surface: #141b24;
+    --ink: #e8ecf1;
+    --ink-dim: #a2adbb;
+    --ink-faint: #6b7684;
+    --accent: #ff7a45;
+    --accent-2: #ffb38a;
+    --line: rgba(255,255,255,0.08);
+    --line-strong: rgba(255,255,255,0.16);
+    --good: #7be495;
+    --radius: 14px;
+    --max: 1160px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% -10%, rgba(255, 122, 69, 0.15), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 10% 110%, rgba(255, 179, 138, 0.08), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  h1, h2, h3, h4 { font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(11, 15, 20, 0.7);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; max-width: var(--max); margin: 0 auto; }
+  .logo { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; text-decoration: none; color: var(--ink); }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a { color: var(--ink-dim); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 20px; border-radius: 999px;
+    font-weight: 500; font-size: 14px; text-decoration: none;
+    border: 1px solid transparent; cursor: pointer;
+    transition: transform 0.15s, background 0.2s, border-color 0.2s;
+  }
+  .btn-primary { background: var(--accent); color: #140a04; }
+  .btn-primary:hover { background: var(--accent-2); transform: translateY(-1px); }
+  .btn-ghost { color: var(--ink); border-color: var(--line-strong); background: transparent; }
+  .btn-ghost:hover { border-color: var(--ink-dim); background: rgba(255,255,255,0.04); }
+  @media (max-width: 720px) { .nav-links a:not(.btn) { display: none; } }
+
+  /* ============================================
+     STATIC HERO
+     ============================================ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-inner { max-width: 860px; margin: 0 auto; }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(255, 122, 69, 0.12);
+    border: 1px solid rgba(255, 122, 69, 0.25);
+    color: var(--accent-2);
+    font-size: 13px; font-weight: 500;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.2s cubic-bezier(0.2,0.9,0.3,1) forwards;
+  }
+  .hero-eyebrow::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 12px var(--accent);
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 76px);
+    margin: 0 auto 24px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s cubic-bezier(0.2,0.9,0.3,1) forwards;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+  .hero p {
+    font-size: 18px; color: var(--ink-dim);
+    max-width: 560px; margin: 0 auto 36px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s cubic-bezier(0.2,0.9,0.3,1) forwards;
+  }
+
+  .hero-cta-row {
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.65s cubic-bezier(0.2,0.9,0.3,1) forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============================================
+     REST OF SITE
+     ============================================ */
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(255, 122, 69, 0.12);
+    border: 1px solid rgba(255, 122, 69, 0.25);
+    color: var(--accent-2);
+    font-size: 13px; font-weight: 500;
+    margin-bottom: 28px;
+  }
+  .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+
+  /* PROOF STRIP */
+  .proof-strip {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 28px 0;
+    background: rgba(255,255,255,0.015);
+    position: relative; z-index: 2;
+  }
+  .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+  .proof-num { font-family: 'Fraunces', serif; font-size: 36px; color: var(--accent-2); font-weight: 500; }
+  .proof-label { font-size: 13px; color: var(--ink-faint); margin-top: 4px; }
+  @media (max-width: 720px) { .proof-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+
+  /* SECTIONS */
+  section { padding: 100px 0; position: relative; z-index: 2; }
+  .section-label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); font-weight: 500; margin-bottom: 16px; }
+  h2.section-title { font-size: clamp(34px, 4.5vw, 52px); margin-bottom: 20px; max-width: 760px; }
+  .section-intro { font-size: 18px; color: var(--ink-dim); max-width: 640px; margin-bottom: 60px; }
+
+  /* PROBLEM GRID */
+  .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 900px) { .problem-grid { grid-template-columns: 1fr; } }
+  .problem-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 32px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .problem-card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+  .problem-icon { font-family: 'Fraunces', serif; font-size: 42px; color: var(--accent); margin-bottom: 16px; font-weight: 500; }
+  .problem-card h3 { font-size: 22px; margin-bottom: 10px; }
+  .problem-card p { color: var(--ink-dim); font-size: 15px; }
+
+  /* CASE STUDIES */
+  .case {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center;
+    padding: 50px 0; border-top: 1px solid var(--line);
+  }
+  .case:last-child { border-bottom: 1px solid var(--line); }
+  @media (max-width: 900px) { .case { grid-template-columns: 1fr; gap: 32px; } }
+  .case-tag {
+    display: inline-block;
+    padding: 4px 10px; border-radius: 4px;
+    background: rgba(255,122,69,0.12);
+    color: var(--accent-2);
+    font-size: 12px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .case h3 { font-size: clamp(28px, 3vw, 38px); margin-bottom: 12px; }
+  .case-role { color: var(--ink-faint); font-size: 14px; margin-bottom: 24px; }
+  .case-body { color: var(--ink-dim); font-size: 16px; line-height: 1.7; }
+  .case-body p { margin-bottom: 14px; }
+  .case-body strong { color: var(--ink); }
+
+  .case-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 28px 0; }
+  .stat {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px;
+  }
+  .stat-num { font-family: 'Fraunces', serif; font-size: 28px; color: var(--accent-2); font-weight: 500; }
+  .stat-label { font-size: 13px; color: var(--ink-faint); margin-top: 4px; }
+
+  .case-quote {
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 20px;
+    margin-top: 24px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .case-quote cite { display: block; font-style: normal; font-family: 'Geist', sans-serif; font-size: 13px; color: var(--ink-faint); margin-top: 10px; }
+
+  .case-visual {
+    background: linear-gradient(135deg, #1a2330, #0f141b);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .case-visual::before {
+    content: "";
+    position: absolute; top: -50%; right: -30%;
+    width: 80%; height: 150%;
+    background: radial-gradient(circle, rgba(255,122,69,0.12), transparent 70%);
+    pointer-events: none;
+  }
+  .mini-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+  .mini-row:last-child { border: 0; }
+  .mini-row .label { color: var(--ink-faint); }
+  .mini-row .val { color: var(--ink); font-weight: 500; }
+  .mini-row .good { color: var(--good); }
+  .mini-row .warn { color: var(--accent); }
+
+  .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .dash-title { font-family: 'Fraunces', serif; font-size: 20px; }
+  .dash-live { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--good); }
+  .dash-live::before { content: ""; width: 6px; height: 6px; background: var(--good); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  .big-num { font-family: 'Fraunces', serif; font-size: 44px; color: var(--accent); margin: 8px 0; font-weight: 500; }
+  .big-label { font-size: 12px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* SERVICES */
+  .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  @media (max-width: 720px) { .services-grid { grid-template-columns: 1fr; } }
+  .service {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 32px;
+    display: flex; flex-direction: column;
+    transition: border-color 0.3s;
+  }
+  .service:hover { border-color: var(--line-strong); }
+  .service h3 { font-size: 24px; margin-bottom: 10px; }
+  .service p { color: var(--ink-dim); font-size: 15px; flex: 1; }
+  .service-tag { font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 500; }
+
+  /* PROCESS */
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .process-steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .process-steps { grid-template-columns: 1fr; } }
+  .step {
+    padding: 28px 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255,255,255,0.01);
+  }
+  .step-num { font-family: 'Fraunces', serif; font-size: 48px; color: var(--accent); line-height: 1; margin-bottom: 16px; font-weight: 500; }
+  .step h4 { font-size: 18px; font-family: 'Geist', sans-serif; font-weight: 600; margin-bottom: 8px; }
+  .step p { font-size: 14px; color: var(--ink-dim); }
+
+  /* CTA BLOCK */
+  .cta-block {
+    background: linear-gradient(135deg, rgba(255,122,69,0.08), rgba(255,179,138,0.04));
+    border: 1px solid rgba(255,122,69,0.2);
+    border-radius: 24px;
+    padding: 72px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-block::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(255,122,69,0.15), transparent 60%);
+    pointer-events: none;
+  }
+  .cta-block h2 { font-size: clamp(32px, 4vw, 48px); margin-bottom: 20px; position: relative; }
+  .cta-block p { color: var(--ink-dim); font-size: 18px; max-width: 540px; margin: 0 auto 36px; position: relative; }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .cta-block .hero-ctas { justify-content: center; position: relative; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--line); padding: 48px 0 32px; color: var(--ink-faint); font-size: 14px; position: relative; z-index: 2; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { color: var(--ink-faint); text-decoration: none; }
+  .footer-links a:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">Clarity<span>.</span></a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#contact" class="btn btn-primary">Book a call</a>
+    </div>
+  </div>
+</nav>
+
+<!-- STATIC HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Sydney-based · Custom software studio</div>
+    <h1>Software built the way your <em>business actually runs</em>.</h1>
+    <p>If your team is still stuck in spreadsheets, paper, or WhatsApp — we build the tool you actually need.</p>
+    <div class="hero-cta-row">
+      <a href="#contact" class="btn btn-primary">Book a 20-min call →</a>
+      <a href="#work" class="btn btn-ghost">See our work</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<div class="proof-strip">
+  <div class="container">
+    <div class="proof-grid">
+      <div>
+        <div class="proof-num">2+</div>
+        <div class="proof-label">Live products in production</div>
+      </div>
+      <div>
+        <div class="proof-num">250+</div>
+        <div class="proof-label">Vehicles tracked daily</div>
+      </div>
+      <div>
+        <div class="proof-num">10×</div>
+        <div class="proof-label">Faster quoting vs. manual</div>
+      </div>
+      <div>
+        <div class="proof-num">15 hrs</div>
+        <div class="proof-label">Saved weekly per client</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section>
+  <div class="container">
+    <div class="section-label">The problem</div>
+    <h2 class="section-title">Your business grew. Your tools didn't.</h2>
+    <p class="section-intro">Most Sydney SMBs are held together by a patchwork of spreadsheets, notebooks, and WhatsApp groups. It works — until it doesn't. Here's what usually breaks first.</p>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">01</div>
+        <h3>Spreadsheets that one person controls</h3>
+        <p>If Sarah's on leave, the business stops. Critical data trapped in files no one else can navigate.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">02</div>
+        <h3>Paper folders that slow everything down</h3>
+        <p>Rego renewals, service history, job sheets — buried in filing cabinets. By the time you find it, you've lost the customer.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">03</div>
+        <h3>WhatsApp chaos between the team</h3>
+        <p>Jobs assigned in chat. Updates missed. Customer details lost. Scaling this past 5 people becomes impossible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="work">
+  <div class="container">
+    <div class="section-label">Our work</div>
+    <h2 class="section-title">Real software. Real Sydney businesses.</h2>
+    <p class="section-intro">We don't do demos or templates. Every system below is live, used daily, and built for the specific business running it.</p>
+
+    <!-- Case 1: Dasi Boys -->
+    <div class="case">
+      <div>
+        <span class="case-tag">Fleet Management · Live</span>
+        <h3>Dasi Boys</h3>
+        <p class="case-role">Scooter &amp; car rental · Sydney · Owned by Juber</p>
+        <div class="case-body">
+          <p>Juber was managing 250+ rego papers in a filing cabinet, calling employees to check if they'd clocked in, and chasing customers manually for payments. Vehicles were being serviced without any history being tracked — meaning the same issues kept coming back.</p>
+          <p>We built <strong>FleetAI</strong>: a full fleet operations platform that handles everything from registration to payments to service history — in one place.</p>
+        </div>
+        <div class="case-stats">
+          <div class="stat">
+            <div class="stat-num">100+</div>
+            <div class="stat-label">Scooters managed</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">40+</div>
+            <div class="stat-label">Cars in fleet</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">250+</div>
+            <div class="stat-label">Rego renewal alerts</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">15 hrs</div>
+            <div class="stat-label">Saved per week</div>
+          </div>
+        </div>
+        <div class="case-quote">
+          "Before FleetAI, I was drowning in paperwork and phone calls. Now everything runs itself — rego alerts, staff check-ins, customer payments. I actually get to run my business."
+          <cite>— Juber, Owner · Dasi Boys</cite>
+        </div>
+      </div>
+      <div class="case-visual">
+  <img src="fleetai.png" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius);" />
+</div>
+    </div>
+
+    <!-- Case 2: Cabinet Maker -->
+    <div class="case">
+      <div class="case-visual">
+  <img src="cabinet.png" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius);" />
+</div>
+      <div>
+        <span class="case-tag">Manufacturing · Live</span>
+        <h3>A Sydney cabinet manufacturer</h3>
+        <p class="case-role">Custom cabinetry · Multi-builder production suite</p>
+        <div class="case-body">
+          <p>Quoting was taking hours. Stock wasn't tracked. Design changes got lost between the floor and the office, leading to wrong materials ordered and expensive rework.</p>
+          <p>We built a <strong>production suite</strong> covering quoting, BOM sheets, stock, designer workload, and builder-by-builder project tracking — with locking checklists that prevent jobs moving forward until every stage is signed off.</p>
+        </div>
+        <div class="case-stats">
+          <div class="stat">
+            <div class="stat-num">10+</div>
+            <div class="stat-label">Quotes done each morning</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">94%</div>
+            <div class="stat-label">On-time delivery rate</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Stock orders lost in WhatsApp</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">1-click</div>
+            <div class="stat-label">BOM to procurement</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-label">What we build</div>
+    <h2 class="section-title">Software that replaces the mess.</h2>
+    <p class="section-intro">We specialise in operational software for Sydney SMBs. If your team does it manually every day — we can build it once and hand it back automated.</p>
+
+    <div class="services-grid">
+      <div class="service">
+        <div class="service-tag">Operations</div>
+        <h3>Custom management platforms</h3>
+        <p>Fleet, production, inventory, dispatch — whatever the core of your business is. Built around how your team actually works, not how software companies think you should work.</p>
+      </div>
+      <div class="service">
+        <div class="service-tag">Automation</div>
+        <h3>Workflows &amp; automation</h3>
+        <p>Auto-debit via PayWay, rego renewal alerts, location-based staff check-ins, WhatsApp notifications to customers. If it's a repeated task, it shouldn't be manual.</p>
+      </div>
+      <div class="service">
+        <div class="service-tag">Customer portals</div>
+        <h3>Portals &amp; booking systems</h3>
+        <p>Let customers book, pay, and self-serve without calling your office. Fewer calls, fewer mistakes, more capacity for the real work.</p>
+      </div>
+      <div class="service">
+        <div class="service-tag">Ongoing partner</div>
+        <h3>Monthly retainer &amp; support</h3>
+        <p>Software breaks, teams grow, requirements change. We stick around — handling hosting, bug fixes, small features, and on-call support so your system keeps working.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="section-label">How we work</div>
+    <h2 class="section-title">Four steps. No surprises.</h2>
+    <p class="section-intro">You shouldn't need a project manager to hire a software company. Here's exactly how it goes.</p>
+
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h4>Free discovery call</h4>
+        <p>20 minutes. You walk us through the mess. We ask the awkward questions. No pitch.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4>Fixed quote &amp; scope</h4>
+        <p>We send back a written plan and a fixed price. No hourly billing. No "it depends."</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>We build it</h4>
+        <p>4–8 weeks, typically. Weekly demos. Your team tests the real thing as we go.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h4>Launch &amp; stay close</h4>
+        <p>We train your team, handle hosting, and stay on retainer so it keeps working as you grow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact">
+  <div class="container">
+    <div class="cta-block">
+      <h2>Ready to stop doing it the hard way?</h2>
+      <p>Book a free 20-minute call. We'll talk through what's eating your time — no pitch, no pressure. If it's a fit, we'll send a fixed quote within 48 hours.</p>
+      <div class="hero-ctas">
+        <a href="mailto:man@claritysoftware.com.au" class="btn btn-primary">Email us directly →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="logo" style="margin-bottom: 6px;">Clarity<span style="color:var(--accent)">.</span></div>
+      <div>© 2026 Clarity Software · Sydney, Australia</div>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:man@claritysoftware.com.au">man@claritysoftware.com.au</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+
+
+</body>
+</html>
