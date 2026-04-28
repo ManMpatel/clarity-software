@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Man Patel — Clarity Software</title>
+<meta name="description" content="Custom software for Sydney businesses. Replace spreadsheets and WhatsApp chaos with software built for how you work." />
+
+<!-- WhatsApp / Social preview -->
+<meta property="og:title" content="Man Patel — Clarity Software" />
+<meta property="og:description" content="Custom software for Sydney SMBs. Tap to connect." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,1,400&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0b0f14;
+    --surface: #141b24;
+    --accent: #ff7a45;
+    --accent-2: #ffb38a;
+    --ink: #e8ecf1;
+    --ink-dim: #a2adbb;
+    --ink-faint: #6b7684;
+    --line: rgba(255,255,255,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    min-height: 100%;
+    background: var(--bg);
+    font-family: 'Geist', sans-serif;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px 40px;
+  }
+
+  /* Background glow */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 80% -10%, rgba(255,122,69,0.18), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 10% 110%, rgba(255,179,138,0.08), transparent 60%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .card {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 400px;
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
+    animation: rise 0.7s cubic-bezier(0.2,0.9,0.3,1) forwards;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Top orange banner */
+  .card-top {
+    background: var(--accent);
+    padding: 32px 28px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-top::before {
+    content: "";
+    position: absolute; top: -60px; right: -40px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .card-top::after {
+    content: "";
+    position: absolute; bottom: -80px; left: -30px;
+    width: 180px; height: 180px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(20,10,4,0.6);
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+    position: relative; z-index: 1;
+  }
+
+  .avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: rgba(20,10,4,0.15);
+    border: 3px solid rgba(20,10,4,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #140a04;
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+
+  .name {
+    font-family: 'Fraunces', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: #140a04;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    position: relative; z-index: 1;
+  }
+
+  .role {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(20,10,4,0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+    position: relative; z-index: 1;
+  }
+
+  /* Body */
+  .card-body {
+    padding: 28px;
+  }
+
+  .tagline {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ink-dim);
+    line-height: 1.4;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tagline strong { font-style: normal; color: var(--accent-2); font-weight: 500; }
+
+  /* Contact rows */
+  .contacts { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+
+  .contact-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  }
+  .contact-item:hover, .contact-item:active {
+    background: rgba(255,122,69,0.08);
+    border-color: rgba(255,122,69,0.25);
+    transform: translateY(-1px);
+  }
+
+  .contact-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: rgba(255,122,69,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .contact-label { font-size: 11px; color: var(--ink-faint); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+  .contact-val { font-size: 14px; color: var(--ink); font-weight: 500; margin-top: 2px; }
+
+  /* Main CTA — WhatsApp */
+  .btn-wa {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%;
+    padding: 17px;
+    background: #25D366;
+    color: #fff;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: transform 0.15s, background 0.2s;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .btn-wa:hover { background: #20bd5a; transform: translateY(-2px); }
+  .btn-wa svg { width: 22px; height: 22px; fill: white; flex-shrink: 0; }
+
+  .btn-web {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    color: var(--ink-dim);
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-web:hover { border-color: var(--line); color: var(--ink); }
+
+  /* Case study pill */
+  .case-pill {
+    margin: 24px 0 0;
+    padding: 16px;
+    background: rgba(255,122,69,0.06);
+    border: 1px solid rgba(255,122,69,0.15);
+    border-radius: 14px;
+  }
+  .case-pill-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .case-pill-text {
+    font-size: 13px;
+    color: var(--ink-dim);
+    line-height: 1.5;
+  }
+  .case-pill-text strong { color: var(--ink); }
+
+  .footer-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 20px;
+    padding: 0 28px 28px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- Top banner -->
+  <div class="card-top">
+    <div class="logo">Clarity.</div>
+    <div class="avatar">MP</div>
+    <div class="name">Man Patel</div>
+    <div class="role">Founder &amp; Developer</div>
+  </div>
+
+  <!-- Body -->
+  <div class="card-body">
+
+    <div class="tagline">
+      Building <strong>custom software</strong> for Sydney businesses still running on spreadsheets &amp; WhatsApp.
+    </div>
+
+    <!-- Contact details -->
+    <div class="contacts">
+      <a class="contact-item" href="tel:0481864170">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-label">Mobile</div>
+          <div class="contact-val">0481 864 170</div>
+        </div>
+      </a>
+      <a class="contact-item" href="mailto:man@clarity-software.com.au">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-val">man@clarity-software.com.au</div>
+        </div>
+      </a>
+      <a class="contact-item" href="https://www.clarity-software.com.au" target="_blank">
+        <div class="contact-icon">🌐</div>
+        <div>
+          <div class="contact-label">Website</div>
+          <div class="contact-val">clarity-software.com.au</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- How we work -->
+    <button class="btn-web" onclick="document.getElementById('how-sheet').style.display='flex'" style="margin-bottom:12px;">
+      How we work →
+    </button>
+
+    <!-- WhatsApp CTA -->
+    <a class="btn-wa" href="https://wa.me/61481864170?text=Hi%20Man%2C%20I%20got%20your%20card.%20Interested%20in%20learning%20more%20about%20what%20you%20do." target="_blank">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Chat on WhatsApp
+    </a>
+
+    <!-- Live case study -->
+    <div class="case-pill">
+      <div class="case-pill-label">Live client · Auburn NSW</div>
+      <div class="case-pill-text">
+        <strong>Dasi Boys</strong> — scooter &amp; car rental. We replaced filing cabinets and WhatsApp with a full fleet system. <strong>250+ vehicles, 15hrs saved weekly.</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-note">
+    Sydney, NSW · clarity-software.com.au
+  </div>
+
+</div>
+
+
+<!-- How we work sheet -->
+<div id="how-sheet" style="display:none;position:fixed;inset:0;z-index:100;align-items:flex-end;justify-content:center;background:rgba(0,0,0,0.7);padding:16px;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#141b24;border:1px solid rgba(255,255,255,0.1);border-radius:28px 28px 20px 20px;width:100%;max-width:420px;padding:32px 28px 40px;animation:rise 0.4s cubic-bezier(0.2,0.9,0.3,1);">
+    
+    <div style="width:40px;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin:0 auto 28px;"></div>
+
+    <div style="font-family:Fraunces,serif;font-size:26px;font-weight:600;letter-spacing:-0.02em;color:#e8ecf1;margin-bottom:8px;line-height:1.2;">
+      Simple process.<br>No surprises.
+    </div>
+    <div style="font-size:14px;color:#6b7684;margin-bottom:32px;">Here's exactly how it works when you reach out.</div>
+
+    <!-- Step 1 -->
+    <div style="display:flex;gap:16px;margin-bottom:24px;">
+      <div style="font-family:Fraunces,serif;font-size:32px;color:#ff7a45;font-weight:600;line-height:1;min-width:36px;">1</div>
+      <div>
+        <div style="font-size:16px;font-weight:600;color:#e8ecf1;margin-bottom:4px;">We sit down with you</div>
+        <div style="font-size:14px;color:#a2adbb;line-height:1.6;">We come to you, listen to how your business runs, and understand exactly what's slowing you down. No tech talk. Just a real conversation.</div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div style="display:flex;gap:16px;margin-bottom:24px;">
+      <div style="font-family:Fraunces,serif;font-size:32px;color:#ff7a45;font-weight:600;line-height:1;min-width:36px;">2</div>
+      <div>
+        <div style="font-size:16px;font-weight:600;color:#e8ecf1;margin-bottom:4px;">We build a free prototype</div>
+        <div style="font-size:14px;color:#a2adbb;line-height:1.6;">You get to see exactly what your software will look like — before paying anything. The prototype is <span style="color:#ffb38a;font-weight:600;">completely free.</span></div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div style="display:flex;gap:16px;margin-bottom:32px;">
+      <div style="font-family:Fraunces,serif;font-size:32px;color:#ff7a45;font-weight:600;line-height:1;min-width:36px;">3</div>
+      <div>
+        <div style="font-size:16px;font-weight:600;color:#e8ecf1;margin-bottom:4px;">You decide — no pressure</div>
+        <div style="font-size:14px;color:#a2adbb;line-height:1.6;">If you love it, we build it. If it's not right — no hard feelings. We'd rather leave with a good relationship than push you into something you don't need.</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <a href="https://wa.me/61481864170?text=Hi%20Man%2C%20I%20got%20your%20card.%20Interested%20in%20learning%20more%20about%20what%20you%20do." target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:17px;background:#25D366;color:#fff;border-radius:16px;font-size:15px;font-weight:600;text-decoration:none;letter-spacing:-0.01em;">
+      Sounds good — let's chat →
+    </a>
+
+  </div>
+</div>
+
+</body>
+</html>
