@@ -610,15 +610,14 @@
     <div class="cta-block">
       <h2>Ready to stop doing it the hard way?</h2>
       <p>Book a free 20-minute call. We'll talk through what's eating your time — no pitch, no pressure. If it's a fit, we'll send a fixed quote within 48 hours.</p>
-      <form class="contact-form" onsubmit="handleSubmit(event)">
+      <form class="contact-form" action="https://formspree.io/f/xnjwpbkr" method="POST">
       <div class="form-row">
-        <input type="text" placeholder="Your name" required />
-        <input type="email" placeholder="Email address" required />
+        <input type="text" name="name" placeholder="Your name" required />
+        <input type="email" name="email" placeholder="Email address" required />
       </div>
-      <input type="tel" placeholder="Phone number" />
-      <textarea placeholder="Tell us what you need help with..." rows="4" required></textarea>
+      <input type="tel" name="phone" placeholder="Phone number" />
+      <textarea name="message" placeholder="Tell us what you need help with..." rows="4" required></textarea>
       <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;">Send message →</button>
-      <div id="form-success" style="display:none;color:var(--good);margin-top:12px;font-size:14px;">✓ Sent! We'll get back to you within 24 hours.</div>
     </form>
     </div>
   </div>
