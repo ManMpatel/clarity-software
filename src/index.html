@@ -347,6 +347,29 @@
   font-size: 11px;
   font-weight: 600;
 }
+
+.contact-form {
+  max-width: 520px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 12px;
+  text-align: left;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+.contact-form input,
+.contact-form textarea {
+  width: 100%; padding: 13px 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  color: var(--ink); font-size: 15px;
+  font-family: 'Geist', sans-serif;
+  outline: none; transition: border-color 0.2s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus { border-color: var(--accent); }
+.contact-form input::placeholder,
+.contact-form textarea::placeholder { color: var(--ink-faint); }
+.contact-form textarea { resize: vertical; min-height: 110px; }
 </style>
 </head>
 <body>
@@ -587,9 +610,16 @@
     <div class="cta-block">
       <h2>Ready to stop doing it the hard way?</h2>
       <p>Book a free 20-minute call. We'll talk through what's eating your time — no pitch, no pressure. If it's a fit, we'll send a fixed quote within 48 hours.</p>
-      <div class="hero-ctas">
-        <a href="mailto:man@claritysoftware.com.au" class="btn btn-primary">Email us directly →</a>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <input type="text" placeholder="Your name" required />
+        <input type="email" placeholder="Email address" required />
       </div>
+      <input type="tel" placeholder="Phone number" />
+      <textarea placeholder="Tell us what you need help with..." rows="4" required></textarea>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;">Send message →</button>
+      <div id="form-success" style="display:none;color:var(--good);margin-top:12px;font-size:14px;">✓ Sent! We'll get back to you within 24 hours.</div>
+    </form>
     </div>
   </div>
 </section>
