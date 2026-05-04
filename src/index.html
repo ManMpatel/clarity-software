@@ -610,15 +610,52 @@
     <div class="cta-block">
       <h2>Ready to stop doing it the hard way?</h2>
       <p>Book a free 20-minute call. We'll talk through what's eating your time — no pitch, no pressure. If it's a fit, we'll send a fixed quote within 48 hours.</p>
-      <form class="contact-form" action="https://formspree.io/f/xnjwpbkr" method="POST">
-      <div class="form-row">
-        <input type="text" name="name" placeholder="Your name" required />
-        <input type="email" name="email" placeholder="Email address" required />
+      <div id="contact-wrap" style="max-width:520px;margin:0 auto;">
+      <form id="contact-form" class="contact-form" style="display:flex;flex-direction:column;gap:12px;">
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="email" name="email" placeholder="Email address" required />
+        </div>
+        <input type="tel" name="phone" placeholder="Phone number" />
+        <textarea name="message" placeholder="Tell us what you need help with..." rows="4" required></textarea>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;">Send message →</button>
+      </form>
+
+      <div id="form-success" style="display:none;text-align:center;padding:40px 20px;">
+        <div style="font-size:48px;margin-bottom:16px;">✓</div>
+        <h3 style="font-family:'Fraunces',serif;font-size:28px;margin-bottom:12px;color:var(--ink);">Message sent!</h3>
+        <p style="color:var(--ink-dim);font-size:16px;">We'll be in touch within 24 hours.</p>
       </div>
-      <input type="tel" name="phone" placeholder="Phone number" />
-      <textarea name="message" placeholder="Tell us what you need help with..." rows="4" required></textarea>
-      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;">Send message →</button>
-    </form>
+    </div>
+
+    <script>
+    document.getElementById('contact-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button[type=submit]');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      const res = await fetch('https://formspree.io/f/xnjwpbkr', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.style.opacity = '0';
+        form.style.transition = 'opacity 0.4s';
+        setTimeout(() => {
+          form.style.display = 'none';
+          document.getElementById('form-success').style.display = 'block';
+        }, 400);
+      } else {
+        btn.textContent = 'Send message →';
+        btn.disabled = false;
+        alert('Something went wrong. Please email us directly at man@claritysoftware.com.au');
+      }
+    });
+    </script>
     </div>
   </div>
 </section>
