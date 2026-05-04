@@ -327,6 +327,26 @@
   .footer-links { display: flex; gap: 24px; }
   .footer-links a { color: var(--ink-faint); text-decoration: none; }
   .footer-links a:hover { color: var(--ink); }
+
+  .hero-pills {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  margin-top: 28px;
+}
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  color: var(--ink-dim);
+}
+.hero-pill::before {
+  content: "✓";
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+}
 </style>
 </head>
 <body>
@@ -351,6 +371,14 @@
     <h1>Software built the way your <em>business actually runs</em>.</h1>
     <p>If your team is still stuck in spreadsheets, paper, or WhatsApp — we build the tool you actually need.</p>
     <div class="hero-cta-row">
+      <div class="hero-pills">
+      <span class="hero-pill">Custom software &amp; apps</span>
+      <span class="hero-pill">Websites &amp; landing pages</span>
+      <span class="hero-pill">SMS &amp; email automation</span>
+      <span class="hero-pill">CRM integration</span>
+      <span class="hero-pill">Inventory &amp; stock management</span>
+      <span class="hero-pill">WhatsApp automation</span>
+    </div>
       <a href="#contact" class="btn btn-primary">Book a 20-min call →</a>
       <a href="#work" class="btn btn-ghost">See our work</a>
     </div>
