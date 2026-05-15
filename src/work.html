@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light only">
+<title>Our Work — Clarity Software</title>
+<meta name="description" content="Real software built for real Sydney businesses. See FleetAI, RunSheet, and Cosbay — live systems built by Clarity Software." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,1,400&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f7f6f3;
+    --surface: #ffffff;
+    --ink: #0a192f;
+    --ink-dim: #4a5568;
+    --ink-faint: #94a3b8;
+    --accent: #ff7a45;
+    --line: rgba(0,0,0,0.08);
+    --cream: #f0ede6;
+    --navy: #0b0f14;
+    --radius: 16px;
+    --max: 1160px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Geist', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .container {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(247,246,243,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 24px; max-width: var(--max); margin: 0 auto;
+  }
+  .logo {
+    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600;
+    letter-spacing: -0.02em; text-decoration: none; color: var(--ink);
+    display: flex; align-items: center; gap: 3px;
+  }
+  .logo-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); margin-top: 2px; flex-shrink: 0;
+  }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a {
+    color: var(--ink-dim); text-decoration: none;
+    font-size: 14px; font-weight: 500; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active {
+    color: var(--ink);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 2px;
+  }
+  .btn-nav {
+    background: var(--accent); color: white;
+    padding: 10px 20px; border-radius: 999px;
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn-nav:hover { opacity: 0.85; transform: translateY(-1px); }
+  @media (max-width: 720px) {
+    .nav-links a:not(.btn-nav) { display: none; }
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 160px 0 80px;
+    border-bottom: 1px solid var(--line);
+  }
+  .overline {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .overline-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+  }
+  .page-header h1 {
+    font-size: clamp(40px, 6vw, 72px);
+    color: var(--ink); max-width: 760px; margin-bottom: 20px;
+  }
+  .page-header p {
+    font-size: 18px; color: var(--ink-dim);
+    max-width: 560px; line-height: 1.7;
+  }
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.23,1,0.32,1),
+                transform 0.6s cubic-bezier(0.23,1,0.32,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── PROJECT SECTIONS ── */
+  .project {
+    padding: 100px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .project-grid.reverse { direction: rtl; }
+  .project-grid.reverse > * { direction: ltr; }
+
+  @media (max-width: 900px) {
+    .project-grid,
+    .project-grid.reverse {
+      grid-template-columns: 1fr;
+      direction: ltr;
+      gap: 40px;
+    }
+    .project-grid.reverse .project-text { order: 1; }
+    .project-grid.reverse .project-image { order: 2; }
+    .project { padding: 64px 0; }
+  }
+
+  /* ── SCREENSHOT & ANNOTATIONS ── */
+  .project-image { position: relative; }
+
+  .screenshot-wrap { position: relative; overflow: visible; }
+
+  .screenshot-frame {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    aspect-ratio: 4/3;
+    box-shadow:
+      0 2.8px 2.2px rgba(0,0,0,0.02),
+      0 6.7px 5.3px rgba(0,0,0,0.028),
+      0 12.5px 10px rgba(0,0,0,0.035),
+      0 22.3px 17.9px rgba(0,0,0,0.042),
+      0 41.8px 33.4px rgba(0,0,0,0.05),
+      0 100px 80px rgba(0,0,0,0.07);
+  }
+  .screenshot-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+
+  .annotation {
+    position: absolute;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.7);
+    border-radius: 10px;
+    padding: 10px 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    display: flex; align-items: flex-start; gap: 8px;
+    max-width: 176px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 10;
+  }
+  .annotation.visible { opacity: 1; transform: translateY(0); }
+  .annotation-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); flex-shrink: 0; margin-top: 4px;
+  }
+  .annotation-text {
+    font-size: 13px; font-weight: 500;
+    color: var(--ink); line-height: 1.4;
+  }
+
+  /* Hide annotations on mobile */
+  @media (max-width: 900px) { .annotation { display: none; } }
+
+  /* ── BENEFIT CARDS (mobile only) ── */
+  .benefit-cards {
+    display: none;
+    gap: 10px;
+    margin-top: 20px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .benefit-cards::-webkit-scrollbar { display: none; }
+  .benefit-card {
+    flex-shrink: 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 13px; color: var(--ink-dim);
+    display: flex; align-items: center; gap: 8px;
+    white-space: nowrap;
+  }
+  .benefit-card::before {
+    content: "→"; color: var(--accent); font-weight: 600;
+  }
+  @media (max-width: 900px) { .benefit-cards { display: flex; } }
+
+  /* ── PROJECT TEXT SIDE ── */
+  .project-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    background: var(--surface); border: 1px solid var(--line);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink); margin-bottom: 20px;
+  }
+  .tag-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    animation: tagPulse 2s ease-in-out infinite;
+  }
+  @keyframes tagPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(1.2); }
+  }
+
+  .project-name {
+    font-size: clamp(36px, 4vw, 52px);
+    color: var(--ink); margin-bottom: 8px;
+  }
+  .project-client {
+    font-size: 14px; color: var(--ink-faint);
+    margin-bottom: 28px; padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+  }
+  .project-problem {
+    font-size: 16px; color: var(--ink-dim);
+    line-height: 1.75; margin-bottom: 28px;
+  }
+  .built-list {
+    list-style: none; margin-bottom: 32px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .built-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 15px; color: var(--ink-dim); line-height: 1.6;
+  }
+  .built-list li::before {
+    content: "→"; color: var(--accent);
+    font-weight: 600; flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* ── QUOTE BLOCK ── */
+  .quote-block {
+    background: var(--cream);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin-bottom: 28px;
+  }
+  .quote-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic; font-size: 18px;
+    color: var(--ink); line-height: 1.55; margin-bottom: 12px;
+  }
+  .quote-attr { font-size: 13px; color: var(--ink-faint); }
+
+  /* ── STAT BOXES ── */
+  .stat-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .stat-box {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 12px; padding: 20px 22px;
+  }
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 40px; color: var(--accent);
+    font-weight: 500; line-height: 1; margin-bottom: 6px;
+  }
+  .stat-label { font-size: 13px; color: var(--ink-faint); }
+
+  /* ── LIVE STATEMENT ── */
+  .live-statement {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; color: var(--ink-faint); line-height: 1.4;
+  }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    background: var(--navy);
+    padding: 120px 24px; text-align: center;
+  }
+  .cta-overline {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+  }
+  .cta-section h2 {
+    font-size: clamp(32px, 4vw, 52px); color: white;
+    margin-bottom: 16px;
+    max-width: 640px; margin-left: auto; margin-right: auto;
+  }
+  .cta-section p {
+    font-size: 17px; color: rgba(255,255,255,0.5);
+    max-width: 480px; margin: 0 auto 36px; line-height: 1.7;
+  }
+  .btn-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: white;
+    padding: 16px 32px; border-radius: 999px;
+    font-size: 16px; font-weight: 600; text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn-cta:hover { opacity: 0.88; transform: translateY(-2px); }
+  .cta-note {
+    font-size: 13px; color: rgba(255,255,255,0.3); margin-top: 16px;
+  }
+  @media (max-width: 600px) { .cta-section { padding: 80px 24px; } }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 48px 24px 32px;
+  }
+  .footer-inner {
+    max-width: var(--max); margin: 0 auto;
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 20px;
+  }
+  .footer-logo {
+    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600;
+    color: white; text-decoration: none;
+    display: flex; align-items: center; gap: 3px; margin-bottom: 6px;
+  }
+  .footer-copy { font-size: 13px; color: rgba(255,255,255,0.35); }
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+  .footer-links a {
+    font-size: 13px; color: rgba(255,255,255,0.4);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: white; }
+  @media (max-width: 600px) {
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      Clarity<div class="logo-dot"></div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="work.html" class="active">Work</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#contact" class="btn-nav">Book a call</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="container">
+    <div class="overline reveal">
+      <div class="overline-dot"></div>
+      Our Work
+    </div>
+    <h1 class="reveal reveal-delay-1">Real software. Real Sydney businesses.</h1>
+    <p class="reveal reveal-delay-2">Every system below is live, used every day, and built around how that specific business actually runs. No templates. No demos.</p>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════
+     PROJECT 1 — FleetAI
+     Image LEFT · Text RIGHT
+     ════════════════════════════════════ -->
+<section class="project">
+  <div class="container">
+    <div class="project-grid">
+
+      <!-- IMAGE -->
+      <div class="project-image">
+        <div class="screenshot-wrap">
+          <div class="screenshot-frame">
+            <img
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
+              alt="FleetAI fleet management dashboard"
+            />
+          </div>
+          <!-- Annotations -->
+          <div class="annotation" style="top:-28px; right:-12px;" data-delay="0">
+            <div class="annotation-dot"></div>
+            <div class="annotation-text">Live fleet status — every vehicle at a glance</div>
+          </div>
+          <div class="annotation" style="top:38%; left:-20px;" data-delay="200">
+            <div class="annotation-dot"></div>
+            <div class="annotation-text">Rego alerts fire 30, 14 & 7 days out</div>
+          </div>
+          <div class="annotation" style="bottom:-22px; right:12%;" data-delay="400">
+            <div class="annotation-dot"></div>
+            <div class="annotation-text">PayWay auto-debit — payments collect themselves</div>
+          </div>
+        </div>
+        <!-- Mobile benefit cards -->
+        <div class="benefit-cards">
+          <div class="benefit-card">Live fleet status</div>
+          <div class="benefit-card">Automatic rego alerts</div>
+          <div class="benefit-card">PayWay auto-debit</div>
+          <div class="benefit-card">Staff clock-in</div>
+        </div>
+      </div>
+
+      <!-- TEXT -->
+      <div class="project-text">
+        <div class="project-tag reveal">
+          <div class="tag-dot"></div>
+          Fleet Management · Live
+        </div>
+        <h2 class="project-name reveal reveal-delay-1">FleetAI</h2>
+        <p class="project-client reveal reveal-delay-1">Dasi Boys · Scooter &amp; car rental · Auburn, Sydney</p>
+
+        <p class="section-label reveal reveal-delay-2">The Problem</p>
+        <p class="project-problem reveal reveal-delay-2">Juber had 250+ rego papers in a filing cabinet, zero visibility of which vehicles were overdue, and was chasing customer payments manually every single day. Vehicles were being serviced without any history tracked — meaning the same problems kept coming back.</p>
+
+        <p class="section-label reveal reveal-delay-3">What We Built</p>
+        <ul class="built-list reveal reveal-delay-3">
+          <li>Full fleet dashboard with live vehicle status</li>
+          <li>Automated rego renewal alerts at 30, 14, and 7 days</li>
+          <li>Location-based staff clock-in replacing daily phone calls</li>
+          <li>Automatic payment collection via PayWay direct debit</li>
+          <li>Service history log per vehicle with full maintenance timeline</li>
+          <li>Customer self-serve payment portal</li>
+        </ul>
+
+        <div class="quote-block reveal reveal-delay-4">
+          <p class="quote-text">"Before FleetAI, I was drowning in paperwork and phone calls. Now everything runs itself — rego alerts, staff check-ins, customer payments. I actually get to run my business."</p>
+          <p class="quote-attr">— Juber, Owner · Dasi Boys · Auburn NSW</p>
+        </div>
+
+        <div class="stat-row reveal reveal-delay-4">
+          <div class="stat-box">
+            <div class="stat-num">100+</div>
+            <div class="stat-label">Vehicles managed</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">15 hrs</div>
+            <div class="stat-label">Saved every week</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     PROJECT 2 — RunSheet
+     Text LEFT · Image RIGHT
+     ════════════════════════════════════ -->
+<section class="project">
+  <div class="container">
+    <div class="project-grid reverse">
+
+      <!-- TEXT -->
+      <div class="project-text">
+        <div class="project-tag reveal">
+          <div class="tag-dot"></div>
+          Logistics &amp; Delivery · Live
+        </div>
+        <h2 class="project-name reveal reveal-delay-1">RunSheet</h2>
+        <p class="project-client reveal reveal-delay-1">Sydney Dispatch · Delivery operations platform</p>
+
+        <p class="section-label reveal reveal-delay-2">The Problem</p>
+        <p class="project-problem reveal reveal-delay-2">Dispatchers had zero visibility of where drivers actually were. Run coordination happened entirely over WhatsApp. Proof of delivery was a phone call. Delays weren't caught until customers were already angry.</p>
+
+        <p class="section-label reveal reveal-delay-3">What We Built</p>
+        <ul class="built-list reveal reveal-delay-3">
+          <li>Live map showing every driver's location and status in real time</li>
+          <li>Digital run sheets replacing paper manifests entirely</li>
+          <li>In-app proof of delivery — photo capture on job completion</li>
+          <li>Dispatch hub with automatic delay detection and alerts</li>
+          <li>Customer notifications sent automatically when runs fall behind</li>
+          <li>Weekly performance reports per driver</li>
+        </ul>
+
+        <div class="quote-block reveal reveal-delay-4">
+          <p class="quote-text">"Built so dispatchers see everything before it becomes a problem — drivers do less admin, and customers stop calling to ask where their delivery is."</p>
+        </div>
+
+        <p class="live-statement reveal reveal-delay-4">Currently live. Performance data published after 6 months of production.</p>
+      </div>
+
+      <!-- IMAGE -->
+      <div class="project-image">
+        <div class="screenshot-wrap">
+          <div class="screenshot-frame">
+            <img
+              src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?auto=format&fit=crop&w=1200&q=80"
+              alt="RunSheet delivery tracking and dispatch"
+            />
+          </div>
+          <!-- Annotations -->
+          <div class="annotation" style="top:-24px; left:10%;" data-delay="0">
+            <div class="annotation-dot"></div>
+            <div class="annotation-text">Every driver's location — updated live</div>
+          </div>
+          <div class="annotation" style="top:36%; right:-16px;" data-delay="200">
+            <div class="annotation-dot"></div>
+            <div class="annotation-text">Digital run sheets — no more paper</div>
+          </div>
+          <div class="annotation" style="bottom:-22px; left:8%;" data-delay="400">
+            <div class="annotation-dot"></div>
+            <div class="annotation-text">Delay alerts fire before customers notice</div>
+          </div>
+        </div>
+        <!-- Mobile benefit cards -->
+        <div class="benefit-cards">
+          <div class="benefit-card">Live GPS tracking</div>
+          <div class="benefit-card">Digital run sheets</div>
+          <div class="benefit-card">Photo proof of delivery</div>
+          <div class="benefit-card">Delay alerts</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     PROJECT 3 — Cosbay
+     Image LEFT · Text RIGHT
+     ════════════════════════════════════ -->
+<section class="project">
+  <div class="container">
+    <div class="project-grid">
+
+      <!-- IMAGE -->
+      <div class="project-image">
+        <div class="screenshot-wrap">
+          <div class="screenshot-frame">
+            <img
+              src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=80"
+              alt="Cosbay cabinet manufacturing management"
+            />
+          </div>
+          <!-- Annotations -->
+          <div class="annotation" style="top:-24px; right:8%;" data-delay="0">
+            <div class="annotation-dot"></div>
+            <div class="annotation-text">Every active job — one screen</div>
+          </div>
+          <div class="annotation" style="top:40%; left:-16px;" data-delay="200">
+            <div class="annotation-dot"></div>
+            <div class="annotation-text">Enquiry to signed project — fully tracked</div>
+          </div>
+          <div class="annotation" style="bottom:-22px; right:14%;" data-delay="400">
+            <div class="annotation-dot"></div>
+            <div class="annotation-text">Stage-by-stage — nothing falls through</div>
+          </div>
+        </div>
+        <!-- Mobile benefit cards -->
+        <div class="benefit-cards">
+          <div class="benefit-card">Owner dashboard</div>
+          <div class="benefit-card">Sales pipeline</div>
+          <div class="benefit-card">Production tracker</div>
+          <div class="benefit-card">Revenue visibility</div>
+        </div>
+      </div>
+
+      <!-- TEXT -->
+      <div class="project-text">
+        <div class="project-tag reveal">
+          <div class="tag-dot"></div>
+          Joinery &amp; Manufacturing · Live
+        </div>
+        <h2 class="project-name reveal reveal-delay-1">Cosbay</h2>
+        <p class="project-client reveal reveal-delay-1">Coast Bay Kitchens · Custom cabinetry &amp; joinery · Sydney</p>
+
+        <p class="section-label reveal reveal-delay-2">The Problem</p>
+        <p class="project-problem reveal reveal-delay-2">Quoting was taking hours per job. Production was tracked on a whiteboard. The owner had no single view of what was being built, what was overdue, or what revenue was outstanding.</p>
+
+        <p class="section-label reveal reveal-delay-3">What We Built</p>
+        <ul class="built-list reveal reveal-delay-3">
+          <li>Owner dashboard — active projects, rooms in production, overdue alerts</li>
+          <li>Sales pipeline from first enquiry through to signed project</li>
+          <li>Production floor tracker with stage-by-stage job progression</li>
+          <li>Builder assignment and individual workload management</li>
+          <li>Bill of materials and item master per project</li>
+          <li>Revenue tracking and outstanding payment visibility per job</li>
+        </ul>
+
+        <div class="quote-block reveal reveal-delay-4">
+          <p class="quote-text">"Built so the owner walks in each morning, opens one screen, and knows exactly where every job stands — without asking anyone."</p>
+        </div>
+
+        <p class="live-statement reveal reveal-delay-4">Currently live. Performance data published after 6 months of production.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <p class="cta-overline reveal">Ready to Start</p>
+  <h2 class="reveal reveal-delay-1">Want something like this built for your business?</h2>
+  <p class="reveal reveal-delay-2">Book a free 20-minute call. We'll listen to how your business runs, tell you honestly if software will help, and send a fixed price quote within 48 hours.</p>
+  <a href="mailto:man@claritysoftware.com.au" class="btn-cta reveal reveal-delay-3">
+    Book a free call →
+  </a>
+  <p class="cta-note reveal reveal-delay-4">No pitch. No obligation. Just an honest conversation.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="footer-logo">
+        Clarity<div class="logo-dot"></div>
+      </a>
+      <p class="footer-copy">© 2026 Clarity Software · Sydney, Australia</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:man@claritysoftware.com.au">man@claritysoftware.com.au</a>
+      <a href="work.html">Work</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Scroll reveal ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ── Annotation stagger ──
+  const annotationObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const annotations = entry.target.querySelectorAll('.annotation');
+        annotations.forEach(ann => {
+          const delay = parseInt(ann.dataset.delay || 0);
+          setTimeout(() => ann.classList.add('visible'), 500 + delay);
+        });
+        annotationObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.project-image').forEach(el => annotationObserver.observe(el));
+</script>
+
+</body>
+</html>
