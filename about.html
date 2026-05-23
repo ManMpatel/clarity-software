@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>About Us | Clarity Software Sydney</title>
+    <meta name="description" content="Meet Clarity Software, a dedicated custom software engineering model in Sydney. Led by founder Man Patel, we build direct, high-performance operational engines for local industries.">
+    <meta name="keywords" content="custom software engineers sydney, local software development company nsw, technical founder agency, business operations systems">
+    <link rel="canonical" href="https://clarity-software.com.au/src/about.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBg: '#0b0f14',
+                        brandSurface: '#141b24',
+                        brandAccent: '#ff7a45',
+                        brandAccentDim: '#ffb38a',
+                        brandInk: '#e8ecf1',
+                        brandInkDim: '#a2adbb',
+                        brandLine: 'rgba(255, 255, 255, 0.08)'
+                    },
+                    fontFamily: {
+                        sans: ['Geist', 'sans-serif'],
+                        serif: ['Fraunces', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .canvas-glow {
+            background: radial-gradient(ellipse 60% 40% at 50% -10%, rgba(255, 122, 69, 0.08), transparent 70%);
+        }
+        .glass-card {
+            background: rgba(20, 27, 36, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-brandBg text-brandInk font-sans antialiased selection:bg-brandAccent selection:text-brandBg canvas-glow min-h-screen flex flex-col justify-between">
+
+    <header class="sticky top-0 z-50 w-full bg-brandBg/80 backdrop-blur-md border-b border-brandLine">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="../index.html" class="font-serif text-2xl font-semibold tracking-tight text-brandInk hover:text-brandAccent transition-colors">
+                Clarity<span class="text-brandAccent">.</span>
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-brandInkDim">
+                <a href="../index.html" class="hover:text-brandInk transition-colors">Home</a>
+                <a href="case-studies.html" class="hover:text-brandInk transition-colors">Live Products</a>
+                <a href="#" class="text-brandInk border-b-2 border-brandAccent pb-1">About Us</a>
+                <a href="contact.html" class="hover:text-brandInk transition-colors">Contact</a>
+            </nav>
+
+            <div class="hidden md:flex items-center gap-4">
+                <a href="tel:0481864170" class="text-sm font-medium hover:text-brandAccent transition-colors flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm text-brandAccent">call</span> 0481 864 170
+                </a>
+                <a href="contact.html" class="bg-brandAccent hover:bg-brandAccent/90 text-brandBg font-semibold text-sm px-5 py-2.5 rounded-xl transition-all">
+                    Request Prototype
+                </a>
+            </div>
+
+            <button onclick="toggleMobileMenu()" class="md:hidden text-brandInk p-2 focus:outline-none">
+                <span id="menu-icon" class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-x-0 top-20 bg-brandBg border-b border-brandLine px-6 py-8 flex flex-col gap-6 shadow-2xl">
+            <nav class="flex flex-col gap-4 text-lg font-medium">
+                <a href="../index.html" class="text-brandInkDim">Home</a>
+                <a href="case-studies.html" class="text-brandInkDim">Live Products</a>
+                <a href="#" class="text-brandAccent">About Us</a>
+                <a href="contact.html" class="text-brandInkDim">Contact</a>
+            </nav>
+            <div class="h-px bg-brandLine w-full"></div>
+            <div class="flex flex-col gap-4">
+                <a href="tel:0481864170" class="text-brandInkDim flex items-center gap-3 font-medium">
+                    <span class="material-symbols-outlined text-brandAccent">call</span> 0481 864 170
+                </a>
+                <a href="contact.html" class="bg-brandAccent text-brandBg font-semibold text-center py-3 rounded-xl">
+                    Request Prototype
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="max-w-4xl mx-auto px-6 pt-16 pb-12">
+            <span class="text-xs font-semibold tracking-widest text-brandAccent uppercase block mb-3">Our Core Philosophy</span>
+            <h1 class="font-serif text-4xl md:text-5xl font-semibold tracking-tight text-brandInk leading-tight mb-6">
+                Elite software built directly for how you actually work.
+            </h1>
+            <p class="text-brandInkDim text-lg font-light leading-relaxed">
+                Clarity Software was founded in Sydney to solve a massive problem plaguing small and mid-sized businesses: the disconnect between generic software sales companies and real operational realities. We don't employ salespeople or technical account representatives. We are an agile engineering practice focused strictly on clean architecture and high-performance system delivery.
+            </p>
+        </section>
+
+        <section class="max-w-4xl mx-auto px-6 py-12 border-t border-brandLine">
+            <h2 class="font-serif text-2xl md:text-3xl font-semibold tracking-tight text-brandInk mb-10">The 3-Step Risk-Free Engineering Process</h2>
+            
+            <div class="space-y-12 relative before:absolute before:inset-y-2 before:left-4 before:w-px before:bg-brandLine">
+                
+                <div class="relative pl-12 group">
+                    <div class="absolute left-1.5 top-1 w-6 h-6 rounded-full bg-brandBg border border-brandAccent flex items-center justify-center text-xs font-semibold text-brandAccent group-hover:bg-brandAccent group-hover:text-brandBg transition-colors">1</div>
+                    <h3 class="text-lg font-semibold text-brandInk">We sit down with you on-site</h3>
+                    <p class="text-sm text-brandInkDim mt-2 leading-relaxed max-w-2xl font-light">
+                        We travel directly to your warehouse, production floor, or office in Sydney. We sit down with you to watch how your staff runs their daily operations. No complex technology terminology—just an honest review of your spreadsheets, bottlenecks, and data gaps.
+                    </p>
+                </div>
+
+                <div class="relative pl-12 group">
+                    <div class="absolute left-1.5 top-1 w-6 h-6 rounded-full bg-brandBg border border-brandAccent flex items-center justify-center text-xs font-semibold text-brandAccent group-hover:bg-brandAccent group-hover:text-brandBg transition-colors">2</div>
+                    <h3 class="text-lg font-semibold text-brandInk">We engineer a free interactive prototype</h3>
+                    <p class="text-sm text-brandInkDim mt-2 leading-relaxed max-w-2xl font-light">
+                        Before you sign a single document or hand over any financial investment, we build a fully interactive dark canvas software mockup. You get to interact directly with your actual buttons, database schemes, and reporting streams first. The prototype phase is <span class="text-brandAccentDim font-medium">100% free of obligation.</span>
+                    </p>
+                </div>
+
+                <div class="relative pl-12 group">
+                    <div class="absolute left-1.5 top-1 w-6 h-6 rounded-full bg-brandBg border border-brandAccent flex items-center justify-center text-xs font-semibold text-brandAccent group-hover:bg-brandAccent group-hover:text-brandBg transition-colors">3</div>
+                    <h3 class="text-lg font-semibold text-brandInk">You decide with zero high-pressure sales</h3>
+                    <p class="text-sm text-brandInkDim mt-2 leading-relaxed max-w-2xl font-light">
+                        If you completely love the interactive dashboard prototype, we move forward into engineering, clean data integration, and live server deployment. If it isn’t the absolute perfect match for your workflows, we walk away with no hard feelings. We protect our professional relationships over everything else.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="max-w-4xl mx-auto px-6 py-12 border-t border-brandLine mb-12">
+            <div class="glass-card rounded-2xl p-8 md:p-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-4 flex flex-col items-center text-center">
+                    <div class="w-24 h-24 rounded-full bg-brandAccent/10 border-2 border-brandAccent flex items-center justify-center font-serif text-3xl font-bold text-brandAccent">
+                        MP
+                    </div>
+                    <h4 class="text-lg font-semibold mt-4 text-brandInk">Man Patel</h4>
+                    <span class="text-xs text-brandInkDim uppercase tracking-wider">Founder & Lead Engineer</span>
+                </div>
+                <div class="md:col-span-8 space-y-3">
+                    <h3 class="font-serif text-2xl font-semibold text-brandInk">The Technical Founder Commitment</h3>
+                    <p class="text-sm text-brandInkDim leading-relaxed font-light">
+                        "When you hire an agency, you shouldn't have your ideas filtered down through project managers, sales agents, or overseas contractors. When you work with Clarity Software, you deal directly with me. I come out to map your workflows, I design your database topology, and I personally deploy the secure code to your servers. True operational clarity requires direct engineering access."
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-brandLine bg-brandBg py-12 w-full">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-brandInkDim">
+            <div class="flex items-center gap-2">
+                <span class="font-serif text-lg font-semibold text-brandInk">Clarity.</span>
+                <span>&copy; 2026 Clarity Software. Built in Sydney, NSW.</span>
+            </div>
+            <div class="flex gap-6">
+                <a href="mailto:man@clarity-software.com.au" class="hover:text-brandAccent transition-colors">man@clarity-software.com.au</a>
+                <a href="tel:0481864170" class="hover:text-brandAccent transition-colors">0481 864 170</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if(menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.textContent = 'close';
+            } else {
+                menu.classList.add('hidden');
+                icon.textContent = 'menu';
+            }
+        }
+    </script>
+</body>
+</html>
