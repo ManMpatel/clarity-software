@@ -2,6 +2,7 @@
   "rewrites": [
     { "source": "/case-studies", "destination": "/case-studies.html" },
     { "source": "/about", "destination": "/about.html" },
-    { "source": "/contact", "destination": "/contact.html" }
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/clarity-fleet", "destination": "/product.html" }
   ]
 }
